@@ -1,51 +1,81 @@
 html {
-font-size: 10px;
-background: url('BGimg.jpg')  bottom center;
-background-size: cover;
+    font-size: 10px;
+    background: url('BGimg.jpg') bottom center;
+    background-size: cover;
 }
 
-body,html {
-margin: 0;
-padding: 0;
-font-family: sans-serif;
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.h1 {
+    display: none;
 }
 
 .keys {
-display: flex;
-flex: 1;
-min-height: 100vh;
-align-items: center;
-justify-content: center;
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 
 .key {
-border: .4rem solid rgb(37, 16, 16);
-border-radius: .5rem;
-margin: 1rem;
-font-size: 1.5rem;
-padding: 1rem .5rem;
-transition: all .07s ease;
-width: 10rem;
-text-align: center;
-color: rgb(238, 225, 225);
-background: rgba(249, 248, 219, 0.375);
-text-shadow: 0 0 .8rem rgb(0, 0, 0);
+    border: .4rem solid rgb(37, 16, 16);
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 10rem;
+    text-align: center;
+    color: rgb(238, 225, 225);
+    background: rgba(249, 248, 219, 0.375);
+    text-shadow: 0 0 .8rem rgb(0, 0, 0);
 }
 
 .playing {
-transform: scale(1.1);
-border-color: #ffcb0e;
-box-shadow: 0 0 1rem #d4cbaa;
+    transform: scale(1.1);
+    border-color: #ffcb0e;
+    box-shadow: 0 0 1rem #d4cbaa;
 }
 
 kbd {
-display: block;
-font-size: 4rem;
+    display: block;
+    font-size: 4rem;
 }
 
 .sound {
-font-size: 1.2rem;
-text-transform: uppercase;
-letter-spacing: .1rem;
-color: #ffc600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    color: #ffc600;
+}
+
+
+
+@media only screen and (max-width: 750px) {
+    body {
+        margin-top: -20px;
+        padding: 0;
+        background: rgb(0, 0, 0);
+    }
+
+    .h1 {
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        padding: 20rem .1rem;
+
+    }
+
+    .key {
+        display: none;
+    }
+
+
 }
