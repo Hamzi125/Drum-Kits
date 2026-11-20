@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta name="description" content="A web drum kit: play with your keyboard or touch, record beats, use a metronome and switch kits.">
+    <meta name="description" content="A web drum kit: play with your keyboard or touch, layer multi-track loops, use a metronome and switch kits.">
     <title>Drum Kit</title>
+    <meta name="theme-color" content="#0b0708">
+    <link rel="icon" href="icons/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Drum Kit">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="kit.js" defer></script>
     <script src="script.js" defer></script>
 </head>
-<body>
+<body data-kit="acoustic">
+    <canvas class="stage-lights" aria-hidden="true"></canvas>
     <header class="top">
-        <h1>Drum Kit</h1>
+        <h1><img class="logo" src="icons/logo.svg" alt="" width="40" height="40"><span>Drum Kit</span></h1>
 
         <div class="controls">
             <label class="control">
                 <span>Kit</span>
-                <select id="kit">
-                    <option value="acoustic">Acoustic</option>
-                    <option value="electronic">Electronic</option>
-                    <option value="percussion">Percussion</option>
-                </select>
+                <select id="kit"></select>
             </label>
 
             <label class="control">
@@ -27,29 +37,68 @@
                 <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
             </label>
 
-            <div class="control group">
+            <div class="control">
                 <button id="metro-toggle" type="button" class="btn" aria-pressed="false">Metronome</button>
                 <label class="bpm">
                     <input id="bpm" type="number" min="40" max="240" value="100" aria-label="Tempo in BPM">
                     <span>BPM</span>
                 </label>
             </div>
+        </div>
+    </header>
 
-            <div class="control group">
-                <button id="rec" type="button" class="btn rec" aria-pressed="false">● Record</button>
-                <button id="play" type="button" class="btn" disabled>▶ Play</button>
-                <label class="loop">
-                    <input id="loop" type="checkbox">
-                    <span>Loop</span>
+    <main class="stage" id="stage"></main>
+
+    <section class="dock" aria-label="Recorder">
+        <div id="tracks" class="tracks" hidden>
+            <div class="tracks-head">
+                <strong>Tracks</strong>
+                <div class="tracks-tools">
+                    <button id="export" type="button" class="btn small" disabled>⬇ Save WAV</button>
+                    <button id="clear" type="button" class="btn small" disabled>Clear all</button>
+                </div>
+            </div>
+            <div id="track-list" class="track-list"></div>
+        </div>
+
+        <div class="transport">
+            <div class="transport-main">
+                <button id="rec" type="button" class="btn rec" aria-pressed="false">● Rec</button>
+                <button id="play" type="button" class="btn" aria-pressed="false" disabled>▶ Play</button>
+                <div class="beats" id="beats" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                <span id="barpos" class="barpos"></span>
+                <button id="tracks-toggle" type="button" class="btn" aria-expanded="false" aria-controls="tracks">
+                    Tracks <b id="track-count" class="count">0</b>
+                </button>
+            </div>
+
+            <div class="transport-opts">
+                <label class="control">
+                    <span>Bars</span>
+                    <select id="bars">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                    </select>
                 </label>
-                <button id="clear" type="button" class="btn" disabled>Clear</button>
+                <label class="control">
+                    <span>Snap</span>
+                    <select id="quantize" aria-label="Quantize">
+                        <option value="0">Off</option>
+                        <option value="2">1/8</option>
+                        <option value="4">1/16</option>
+                    </select>
+                </label>
+                <label class="check">
+                    <input id="countin" type="checkbox" checked>
+                    <span>Count-in</span>
+                </label>
             </div>
         </div>
         <p id="status" class="status" role="status"></p>
-    </header>
+    </section>
 
-    <main class="keys" id="keys" aria-label="Drum pads"></main>
-
-    <p class="hint">Press the keys on your keyboard, or tap the pads.</p>
+    <p class="hint">Hit the drums or use the keys &nbsp;·&nbsp; <kbd>Shift</kbd> soft hit &nbsp;·&nbsp; <kbd>Space</kbd> play/stop &nbsp;·&nbsp; <kbd>Enter</kbd> record</p>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#4a1820"/>
+      <stop offset="1" stop-color="#0b0708"/>
+    </radialGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6d0f1f"/>
+      <stop offset=".45" stop-color="#d0344b"/>
+      <stop offset="1" stop-color="#5a0c19"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aa3ad"/>
+      <stop offset=".5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#8a929b"/>
+    </linearGradient>
+    <radialGradient id="head" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6dccb"/>
+    </radialGradient>
+    <linearGradient id="stick" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe2a8"/>
+      <stop offset="1" stop-color="#e0a24a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" fill="url(#bg)"/><g transform="translate(6.4 6.4) scale(.8)">
+  <!-- glow under the drum -->
+  <ellipse cx="32" cy="50" rx="24" ry="6" fill="#ffb547" opacity=".18"/>
+  <!-- shell -->
+  <path d="M11 31 v14 a21 6.5 0 0 0 42 0 v-14 z" fill="url(#shell)"/>
+  <path d="M11 44 a21 6.5 0 0 0 42 0" fill="none" stroke="url(#chrome)" stroke-width="2.2"/>
+  <!-- tension lugs -->
+  <path d="M17 34.5 v9 M25 36.3 v9.4 M32 36.8 v9.6 M39 36.3 v9.4 M47 34.5 v9" stroke="#ffcf7a" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
+  <!-- head -->
+  <ellipse cx="32" cy="31" rx="21" ry="6.5" fill="url(#head)" stroke="url(#chrome)" stroke-width="2.2"/>
+  <!-- sticks -->
+  <g stroke-linecap="round">
+    <line x1="13" y1="9" x2="34" y2="29" stroke="url(#stick)" stroke-width="3.6"/>
+    <line x1="51" y1="9" x2="30" y2="29" stroke="url(#stick)" stroke-width="3.6"/>
+  </g>
+  <circle cx="13" cy="9" r="2.6" fill="#ffe9bf"/>
+  <circle cx="51" cy="9" r="2.6" fill="#ffe9bf"/>
+</g></svg>
