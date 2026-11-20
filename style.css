@@ -1,43 +1,188 @@
+:root {
+    --accent: #ffc600;
+    --text: #eee1e1;
+    --panel: rgba(20, 12, 12, 0.6);
+    --pad: rgba(249, 248, 219, 0.25);
+    --border: rgb(37, 16, 16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 10px;
-    background: url('BGimg.jpg') bottom center;
+    background-color: #1a1210;
+    background-image: url('bg.jpg');
+    background-image: image-set(url('bg.webp') type('image/webp'), url('bg.jpg') type('image/jpeg'));
+    background-position: bottom center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
-body,
-html {
+body {
     margin: 0;
-    padding: 0;
-    font-family: sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, sans-serif;
+    color: var(--text);
 }
 
-.h1 {
-    display: none;
+/* ---------- Header & controls ---------- */
+
+.top {
+    padding: 1.6rem;
+    text-align: center;
 }
+
+h1 {
+    margin: 0 0 1.2rem;
+    font-size: 3.2rem;
+    letter-spacing: .3rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 1rem #000;
+}
+
+.controls {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem 2rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 1rem;
+    max-width: 100%;
+    background: var(--panel);
+    backdrop-filter: blur(4px);
+    font-size: 1.4rem;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.control > span {
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    font-size: 1.2rem;
+    color: var(--accent);
+}
+
+select,
+input[type="number"] {
+    font: inherit;
+    color: var(--text);
+    background: rgba(0, 0, 0, .5);
+    border: 1px solid #6b5b4b;
+    border-radius: .5rem;
+    padding: .4rem .6rem;
+}
+
+input[type="number"] {
+    width: 6.5rem;
+}
+
+input[type="range"] {
+    accent-color: var(--accent);
+}
+
+.bpm {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: 1.2rem;
+}
+
+.loop {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.loop input {
+    accent-color: var(--accent);
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.btn {
+    font: inherit;
+    cursor: pointer;
+    color: var(--text);
+    background: rgba(0, 0, 0, .5);
+    border: 1px solid #6b5b4b;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--accent);
+}
+
+.btn:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.btn[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a1210;
+}
+
+.btn.rec[aria-pressed="true"] {
+    background: #d63031;
+    border-color: #d63031;
+    color: #fff;
+}
+
+.status {
+    min-height: 1.8rem;
+    margin: .8rem 0 0;
+    font-size: 1.3rem;
+    text-shadow: 0 0 .6rem #000;
+}
+
+/* ---------- Pads ---------- */
 
 .keys {
-    display: flex;
     flex: 1;
-    min-height: 100vh;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
     justify-content: center;
+    padding: 1rem;
 }
 
 .key {
-    border: .4rem solid rgb(37, 16, 16);
+    font: inherit;
+    border: .4rem solid var(--border);
     border-radius: .5rem;
     margin: 1rem;
-    font-size: 1.5rem;
     padding: 1rem .5rem;
-    transition: all .07s ease;
     width: 10rem;
     text-align: center;
-    color: rgb(238, 225, 225);
-    background: rgba(249, 248, 219, 0.375);
-    text-shadow: 0 0 .8rem rgb(0, 0, 0);
+    color: var(--text);
+    background: var(--pad);
+    text-shadow: 0 0 .8rem #000;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .07s ease, border-color .07s ease, box-shadow .07s ease;
 }
 
-.playing {
+.key:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.key.playing {
     transform: scale(1.1);
     border-color: #ffcb0e;
     box-shadow: 0 0 1rem #d4cbaa;
@@ -45,37 +190,82 @@ html {
 
 kbd {
     display: block;
+    font-family: inherit;
     font-size: 4rem;
 }
 
 .sound {
+    display: block;
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: .1rem;
-    color: #ffc600;
+    color: var(--accent);
 }
 
+.hint {
+    margin: 0 0 1.6rem;
+    text-align: center;
+    font-size: 1.3rem;
+    opacity: .8;
+    text-shadow: 0 0 .6rem #000;
+}
 
+/* ---------- Small screens ---------- */
 
-@media only screen and (max-width: 750px) {
-    body {
-        margin-top: -20px;
-        padding: 0;
-        background: rgb(0, 0, 0);
+@media (max-width: 750px) {
+    h1 {
+        font-size: 2.4rem;
     }
 
-    .h1 {
-        display: block;
-        font-size: 20px;
-        color: #ffffff;
-        text-align: center;
-        padding: 20rem .1rem;
+    .controls {
+        display: flex;
+        gap: 1rem 1.4rem;
+    }
 
+    input[type="range"] {
+        width: 10rem;
+    }
+
+    .keys {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        width: 100%;
+        max-width: 42rem;
+        margin: 0 auto;
     }
 
     .key {
+        width: auto;
+        margin: 0;
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    kbd {
+        font-size: 2.6rem;
+    }
+}
+
+@media (hover: none) {
+    /* Touch devices: keyboard letters aren't useful */
+    kbd {
         display: none;
     }
 
+    .sound {
+        font-size: 1.4rem;
+    }
 
+    .hint {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .key {
+        transition: none;
+    }
 }

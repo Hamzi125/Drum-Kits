@@ -3,82 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A web drum kit: play with your keyboard or touch, record beats, use a metronome and switch kits.">
+    <title>Drum Kit</title>
     <link rel="stylesheet" href="style.css">
-    <title>DRUM KITS</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1 class="h1">under construction</h1>
-    <div class="keys">
-        <div data-key="65" class="key">
-            <kbd>A</kbd>
-            <span class="sound">BOOM</span>
-        </div>
-        <div data-key="83" class="key">
-            <kbd>S</kbd>
-            <span class="sound">CLAP</span>
-        </div>
-        <div data-key="68" class="key">
-            <kbd>D</kbd>
-            <span class="sound">HIHAT</span>
-        </div>
-        <div data-key="70" class="key">
-            <kbd>F</kbd>
-            <span class="sound">KICK</span>
-        </div>
-        <div data-key="71" class="key">
-            <kbd>G</kbd>
-            <span class="sound">OPENHAT</span>
-        </div>
-        <div data-key="72" class="key">
-            <kbd>H</kbd>
-            <span class="sound">RIDE</span>
-        </div>
-        <div data-key="74" class="key">
-            <kbd>J</kbd>
-            <span class="sound">SNARE</span>
-        </div>
-        <div data-key="75" class="key">
-            <kbd>k</kbd>
-            <span class="sound">TINK</span>
-        </div>
-        <div data-key="76" class="key">
-            <kbd>l</kbd>
-            <span class="sound">TOM</span>
-        </div>
-    </div>
-    <audio data-key="65" src="Sounds/boom.wav"></audio>
-    <audio data-key="83" src="Sounds/clap.wav"></audio>
-    <audio data-key="68" src="Sounds/hihat.wav"></audio>
-    <audio data-key="70" src="Sounds/kick.wav"></audio>
-    <audio data-key="71" src="Sounds/openhat.wav"></audio>
-    <audio data-key="72" src="Sounds/ride.wav"></audio>
-    <audio data-key="74" src="Sounds/snare.wav"></audio>
-    <audio data-key="75" src="Sounds/tink.wav"></audio>
-    <audio data-key="76" src="Sounds/tom.wav"></audio>
+    <header class="top">
+        <h1>Drum Kit</h1>
 
+        <div class="controls">
+            <label class="control">
+                <span>Kit</span>
+                <select id="kit">
+                    <option value="acoustic">Acoustic</option>
+                    <option value="electronic">Electronic</option>
+                    <option value="percussion">Percussion</option>
+                </select>
+            </label>
+
+            <label class="control">
+                <span>Volume</span>
+                <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8">
+            </label>
+
+            <div class="control group">
+                <button id="metro-toggle" type="button" class="btn" aria-pressed="false">Metronome</button>
+                <label class="bpm">
+                    <input id="bpm" type="number" min="40" max="240" value="100" aria-label="Tempo in BPM">
+                    <span>BPM</span>
+                </label>
+            </div>
+
+            <div class="control group">
+                <button id="rec" type="button" class="btn rec" aria-pressed="false">● Record</button>
+                <button id="play" type="button" class="btn" disabled>▶ Play</button>
+                <label class="loop">
+                    <input id="loop" type="checkbox">
+                    <span>Loop</span>
+                </label>
+                <button id="clear" type="button" class="btn" disabled>Clear</button>
+            </div>
+        </div>
+        <p id="status" class="status" role="status"></p>
+    </header>
+
+    <main class="keys" id="keys" aria-label="Drum pads"></main>
+
+    <p class="hint">Press the keys on your keyboard, or tap the pads.</p>
 </body>
-
-<script>
-
-window.addEventListener('keydown', playSound);
-
-function playSound(e){
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if(!audio) return
-
-    key.classList.add('playing')
-    audio.currentTime = 0;
-    audio.play();
-}
-const keys = Array.from(document.querySelectorAll('.key'));
-keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-
-
-
-function removeTransition(e){
-    if(e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing')
-}
-</script>
 </html>
