@@ -1,62 +1,260 @@
-:root {
-    --accent: #ffc600;
-    --text: #eee1e1;
-    --panel: rgba(20, 12, 12, 0.6);
-    --pad: rgba(249, 248, 219, 0.25);
-    --border: rgb(37, 16, 16);
+/* Registered so the colours can fade smoothly when you switch kits */
+@property --bg { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --spot { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --accent-2 { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --rug { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --beam { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --shell-a { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --shell-b { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --shell-c { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --head-a { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --head-b { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --head-c { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --head-line { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --cym-a { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --cym-b { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --cym-c { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --cym-d { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --label { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --label-name { syntax: '<color>'; inherits: true; initial-value: transparent; }
+
+/* ======================================================
+   Themes: one set of colours per kit
+   ====================================================== */
+
+:root,
+body[data-kit="acoustic"] {
+    --beam: #ffdcae;
+    --bg: #0b0708;
+    --spot: rgba(255, 196, 120, .22);
+    --accent: #ffb547;
+    --accent-2: #ff6a3d;
+    --rug: #3a1418;
+
+    --shell-a: #c0283f;     /* wine-red sparkle lacquer */
+    --shell-b: #6d0f1f;
+    --shell-c: #2a050c;
+    --head-a: #fffdf7;
+    --head-b: #efe8da;
+    --head-c: #cfc4ae;
+    --head-line: rgba(80, 60, 30, .14);
+    --cym-a: #fff1c4;
+    --cym-b: #e9b65a;
+    --cym-c: #b9802a;
+    --cym-d: #7a4f17;
+
+    --label: #3b2a1f;
+    --label-name: #a4541c;
 }
+
+body[data-kit="rock"] {
+    --beam: #cdb6ff;
+    --bg: #07060c;
+    --spot: rgba(170, 120, 255, .28);
+    --accent: #b98cff;
+    --accent-2: #3fd0ff;
+    --rug: #1d1236;
+
+    --shell-a: #4a4a57;     /* black chrome */
+    --shell-b: #17171e;
+    --shell-c: #040406;
+    --head-a: #f7f9fc;
+    --head-b: #dde2ea;
+    --head-c: #aab2be;
+    --head-line: rgba(40, 30, 80, .14);
+    --cym-a: #fff6d8;
+    --cym-b: #f0c766;
+    --cym-c: #c28d2e;
+    --cym-d: #6e4a12;
+
+    --label: #22202c;
+    --label-name: #6b3fd6;
+}
+
+body[data-kit="lofi"] {
+    --beam: #ffe6cc;
+    --bg: #0e1413;
+    --spot: rgba(255, 214, 170, .18);
+    --accent: #f4b9a2;
+    --accent-2: #8fd3c7;
+    --rug: #22322e;
+
+    --shell-a: #93d1c3;     /* faded mint */
+    --shell-b: #4f8b80;
+    --shell-c: #22403b;
+    --head-a: #fff7e8;
+    --head-b: #efe1c6;
+    --head-c: #cdb995;
+    --head-line: rgba(80, 60, 30, .16);
+    --cym-a: #f3e4c0;
+    --cym-b: #cdb072;
+    --cym-c: #94794a;
+    --cym-d: #57472b;
+
+    --label: #3a3226;
+    --label-name: #b0614a;
+}
+
+body[data-kit="electronic"] {
+    --beam: #9af2ff;
+    --bg: #05060d;
+    --spot: rgba(80, 200, 255, .2);
+    --accent: #2ee6ff;
+    --accent-2: #ff3df2;
+    --rug: #1a0f3a;
+
+    --shell-a: #2b2f45;
+    --shell-b: #12141f;
+    --shell-c: #05060a;
+    --head-a: #2a3350;
+    --head-b: #151b2e;
+    --head-c: #0a0e1a;
+    --head-line: rgba(46, 230, 255, .25);
+    --cym-a: #e8fbff;
+    --cym-b: #8fd8ee;
+    --cym-c: #3b7d9c;
+    --cym-d: #163a52;
+
+    --label: #dffaff;
+    --label-name: #2ee6ff;
+}
+
+body[data-kit="percussion"] {
+    --beam: #ffd3a1;
+    --bg: #0d0805;
+    --spot: rgba(255, 170, 90, .2);
+    --accent: #ff9a3c;
+    --accent-2: #ffd36b;
+    --rug: #3b220f;
+
+    --shell-a: #c98a4b;     /* natural wood */
+    --shell-b: #8a5426;
+    --shell-c: #3e220c;
+    --head-a: #f6e3bd;      /* animal-skin heads */
+    --head-b: #dfc08a;
+    --head-c: #b48c55;
+    --head-line: rgba(90, 55, 20, .2);
+    --cym-a: #ffe9c2;
+    --cym-b: #d99a52;
+    --cym-c: #9a5f24;
+    --cym-d: #5a3410;
+
+    --label: #3b2412;
+    --label-name: #8a3f10;
+}
+
+/* ======================================================
+   Base
+   ====================================================== */
 
 * {
     box-sizing: border-box;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 html {
     font-size: 10px;
-    background-color: #1a1210;
-    background-image: url('bg.jpg');
-    background-image: image-set(url('bg.webp') type('image/webp'), url('bg.jpg') type('image/jpeg'));
-    background-position: bottom center;
-    background-size: cover;
-    background-attachment: fixed;
+    background: var(--bg);
 }
 
 body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
-    font-family: system-ui, sans-serif;
-    color: var(--text);
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    color: #f3ece6;
+    background:
+        radial-gradient(ellipse 60% 55% at 50% -5%, var(--spot), transparent 70%),
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(0, 0, 0, .9), transparent 60%),
+        var(--bg);
+    overflow-x: hidden;
+    transition: --bg .8s ease,
+        --spot .8s ease,
+        --accent .8s ease,
+        --accent-2 .8s ease,
+        --rug .8s ease,
+        --beam .8s ease,
+        --shell-a .8s ease,
+        --shell-b .8s ease,
+        --shell-c .8s ease,
+        --head-a .8s ease,
+        --head-b .8s ease,
+        --head-c .8s ease,
+        --head-line .8s ease,
+        --cym-a .8s ease,
+        --cym-b .8s ease,
+        --cym-c .8s ease,
+        --cym-d .8s ease,
+        --label .8s ease,
+        --label-name .8s ease;
 }
 
-/* ---------- Header & controls ---------- */
+/* ---------- Stage lighting: kept faint on purpose ---------- */
 
-.top {
-    padding: 1.6rem;
-    text-align: center;
+/* darker edges pull the eye to the kit */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse 85% 75% at 50% 45%, transparent 55%, rgba(0, 0, 0, .55) 100%);
 }
 
-h1 {
-    margin: 0 0 1.2rem;
-    font-size: 3.2rem;
-    letter-spacing: .3rem;
-    text-transform: uppercase;
-    text-shadow: 0 0 1rem #000;
+/* a whisper of film grain so the dark areas don't look flat */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    opacity: .05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.controls {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem 2rem;
-    padding: 1.2rem 1.6rem;
-    border-radius: 1rem;
-    max-width: 100%;
-    background: var(--panel);
-    backdrop-filter: blur(4px);
-    font-size: 1.4rem;
+/* moving-head spotlights + haze, drawn by kit.js */
+.stage-lights {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
+
+/* Soft coloured light that pulses with every hit (animated from kit.js) */
+.ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .25;
+    background:
+        radial-gradient(ellipse 50% 40% at 50% 60%, var(--accent), transparent 70%),
+        radial-gradient(ellipse 35% 30% at 15% 90%, var(--accent-2), transparent 70%),
+        radial-gradient(ellipse 35% 30% at 85% 90%, var(--accent-2), transparent 70%);
+    mix-blend-mode: screen;
+    filter: saturate(1.2);
+    z-index: 0;
+}
+
+.top,
+.stage,
+.dock,
+.hint {
+    position: relative;
+    z-index: 1;
+}
+
+/* ======================================================
+   Shared controls
+   ====================================================== */
 
 .control {
     display: flex;
@@ -66,7 +264,7 @@ h1 {
 
 .control > span {
     text-transform: uppercase;
-    letter-spacing: .1rem;
+    letter-spacing: .15rem;
     font-size: 1.2rem;
     color: var(--accent);
 }
@@ -74,11 +272,23 @@ h1 {
 select,
 input[type="number"] {
     font: inherit;
-    color: var(--text);
-    background: rgba(0, 0, 0, .5);
-    border: 1px solid #6b5b4b;
-    border-radius: .5rem;
-    padding: .4rem .6rem;
+    color: #f3ece6;
+    background: rgba(0, 0, 0, .45);
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: .8rem;
+    padding: .4rem .8rem;
+}
+
+select option {
+    background: #1a1416;
+}
+
+select:focus-visible,
+input:focus-visible,
+.btn:focus-visible,
+.chip:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 input[type="number"] {
@@ -89,22 +299,19 @@ input[type="range"] {
     accent-color: var(--accent);
 }
 
-.bpm {
+.bpm,
+.check {
     display: flex;
     align-items: center;
-    gap: .4rem;
-    font-size: 1.2rem;
+    gap: .5rem;
+    font-size: 1.3rem;
 }
 
-.loop {
-    display: flex;
-    align-items: center;
-    gap: .4rem;
-    font-size: 1.3rem;
+.check {
     cursor: pointer;
 }
 
-.loop input {
+.check input {
     accent-color: var(--accent);
     width: 1.6rem;
     height: 1.6rem;
@@ -113,143 +320,526 @@ input[type="range"] {
 .btn {
     font: inherit;
     cursor: pointer;
-    color: var(--text);
-    background: rgba(0, 0, 0, .5);
-    border: 1px solid #6b5b4b;
-    border-radius: .5rem;
-    padding: .5rem 1rem;
+    color: #f3ece6;
+    background: rgba(0, 0, 0, .45);
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: .8rem;
+    padding: .5rem 1.2rem;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+    white-space: nowrap;
+}
+
+.btn.small {
+    font-size: 1.3rem;
+    padding: .3rem .9rem;
 }
 
 .btn:hover:not(:disabled) {
     border-color: var(--accent);
+    box-shadow: 0 0 1.2rem color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .btn:disabled {
-    opacity: .4;
+    opacity: .35;
     cursor: default;
 }
 
-.btn[aria-pressed="true"] {
+.btn[aria-pressed="true"],
+.btn[aria-expanded="true"] {
     background: var(--accent);
     border-color: var(--accent);
-    color: #1a1210;
+    color: #140c06;
+    box-shadow: 0 0 1.6rem color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.btn.rec {
+    color: #ff6b74;
 }
 
 .btn.rec[aria-pressed="true"] {
-    background: #d63031;
-    border-color: #d63031;
+    background: #ff3b47;
+    border-color: #ff3b47;
     color: #fff;
+    box-shadow: 0 0 1.6rem rgba(255, 59, 71, .6);
+    animation: rec-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes rec-pulse {
+    50% { box-shadow: 0 0 .4rem rgba(255, 59, 71, .3); }
+}
+
+/* ======================================================
+   Header
+   ====================================================== */
+
+.top {
+    padding: 1.4rem 1.6rem .2rem;
+    text-align: center;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 0 0 1rem;
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: .6rem;
+    text-transform: uppercase;
+}
+
+h1 .logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1rem;
+    box-shadow: 0 .4rem 1.6rem rgba(0, 0, 0, .5), 0 0 1.6rem color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+h1 span {
+    background: linear-gradient(180deg, #fff 20%, var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 1.4rem color-mix(in srgb, var(--accent) 45%, transparent));
+}
+
+.controls {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2.2rem;
+    max-width: 100%;
+    padding: .9rem 1.8rem;
+    border-radius: 1.6rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.controls,
+.transport,
+.tracks {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .02));
+    border: 1px solid rgba(255, 255, 255, .1);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* ======================================================
+   Drum kit stage (SVG drawn by kit.js)
+   ====================================================== */
+
+/* The kit always fits the space left between the header and the recorder */
+.stage {
+    position: relative;
+    flex: 1;
+    min-height: 16rem;
+}
+
+.kit-svg {
+    position: absolute;
+    inset: .5rem 1rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 1rem);
+    overflow: visible;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.piece {
+    cursor: pointer;
+}
+
+/* Only the instrument itself is clickable, not its glow, shadow or ripples */
+.deco,
+.lbl {
+    pointer-events: none;
+}
+
+.piece .body {
+    transition: filter .2s;
+}
+
+.piece:hover .body {
+    filter: brightness(1.08);
+}
+
+.lbl {
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-weight: 700;
+    letter-spacing: .05em;
+}
+
+.lbl.letter {
+    fill: #fff;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, .55);
+    stroke-width: 3px;
+}
+
+.lbl.name {
+    fill: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, .6);
+    stroke-width: 3px;
+}
+
+.lbl.on-head {
+    stroke: none;
+}
+
+.lbl.on-head.letter {
+    fill: var(--label);
+    opacity: .85;
+}
+
+.lbl.on-head.name {
+    fill: var(--label-name);
+}
+
+.lbl.logo {
+    fill: var(--label-name);
+    letter-spacing: .35em;
+    opacity: .7;
+}
+
+.lbl.edge {
+    fill: #fff;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    paint-order: stroke;
+    stroke: rgba(0, 0, 0, .65);
+    stroke-width: 3px;
+}
+
+/* Electronic kit: neon outlines on the dark mesh heads */
+body[data-kit="electronic"] .piece .head {
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-opacity: .7;
+}
+
+/* ======================================================
+   Recorder dock: transport + tracks
+   ====================================================== */
+
+.dock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    padding: 0 1.6rem .8rem;
+}
+
+.transport {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem 2rem;
+    max-width: 100%;
+    padding: .8rem 1.4rem;
+    border-radius: 1.6rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.transport-main,
+.transport-opts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem 1.4rem;
+}
+
+.beats {
+    display: flex;
+    gap: .5rem;
+    padding: 0 .4rem;
+}
+
+.beats i {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .15);
+    transition: background .06s, box-shadow .06s;
+}
+
+.beats i.on {
+    background: var(--accent);
+    box-shadow: 0 0 1rem var(--accent);
+}
+
+.beats i.on.accent {
+    background: #fff;
+    box-shadow: 0 0 1.2rem #fff;
+}
+
+.barpos {
+    min-width: 3.2rem;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    opacity: .8;
+}
+
+.count {
+    display: inline-block;
+    min-width: 1.8rem;
+    margin-left: .3rem;
+    padding: 0 .4rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .15);
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 .status {
     min-height: 1.8rem;
-    margin: .8rem 0 0;
-    font-size: 1.3rem;
-    text-shadow: 0 0 .6rem #000;
-}
-
-/* ---------- Pads ---------- */
-
-.keys {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.key {
-    font: inherit;
-    border: .4rem solid var(--border);
-    border-radius: .5rem;
-    margin: 1rem;
-    padding: 1rem .5rem;
-    width: 10rem;
-    text-align: center;
-    color: var(--text);
-    background: var(--pad);
-    text-shadow: 0 0 .8rem #000;
-    cursor: pointer;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform .07s ease, border-color .07s ease, box-shadow .07s ease;
-}
-
-.key:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-}
-
-.key.playing {
-    transform: scale(1.1);
-    border-color: #ffcb0e;
-    box-shadow: 0 0 1rem #d4cbaa;
-}
-
-kbd {
-    display: block;
-    font-family: inherit;
-    font-size: 4rem;
-}
-
-.sound {
-    display: block;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: .1rem;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
     color: var(--accent);
+    text-align: center;
+}
+
+/* ---------- Tracks panel ---------- */
+
+.tracks {
+    width: min(100%, 92rem);
+    border-radius: 1.6rem;
+    padding: 1rem 1.2rem;
+}
+
+.tracks-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .8rem;
+    font-size: 1.5rem;
+    letter-spacing: .15rem;
+    text-transform: uppercase;
+}
+
+.tracks-tools {
+    display: flex;
+    gap: .6rem;
+}
+
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    max-height: 26vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.empty {
+    margin: .4rem 0;
+    font-size: 1.4rem;
+    opacity: .7;
+    line-height: 1.4;
+}
+
+.track {
+    display: grid;
+    grid-template-columns: 13rem 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: .6rem .8rem .6rem 1.1rem;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, .3);
+    border-left: .4rem solid var(--c);
+    transition: opacity .2s;
+}
+
+.track.muted {
+    opacity: .45;
+}
+
+.track.recording {
+    box-shadow: 0 0 0 1px #ff3b47, 0 0 1.6rem rgba(255, 59, 71, .35);
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    min-width: 0;
+}
+
+.track-name {
+    white-space: nowrap;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--c);
+}
+
+.track-kit {
+    font-size: 1.2rem;
+    padding: .2rem .4rem;
+}
+
+.timeline {
+    position: relative;
+    height: 4.4rem;
+    border-radius: .6rem;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 calc(25% - 1px), rgba(255, 255, 255, .04) calc(25% - 1px) 25%),
+        rgba(255, 255, 255, .04);
+    overflow: hidden;
+}
+
+.barline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, .25);
+}
+
+.note {
+    position: absolute;
+    width: .7rem;
+    height: .7rem;
+    margin: -.35rem 0 0 -.35rem;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 .6rem var(--c);
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: #fff;
+    box-shadow: 0 0 .8rem #fff;
+    opacity: .8;
+}
+
+.track-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.track-vol {
+    width: 7rem;
+}
+
+.chip {
+    font: inherit;
+    font-size: 1.3rem;
+    font-weight: 700;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .7rem;
+    cursor: pointer;
+    color: #f3ece6;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .15);
+}
+
+.chip[aria-pressed="true"] {
+    background: var(--c);
+    border-color: var(--c);
+    color: #111;
+}
+
+.chip.del:hover {
+    background: #ff3b47;
+    border-color: #ff3b47;
 }
 
 .hint {
-    margin: 0 0 1.6rem;
+    margin: 0 0 1rem;
     text-align: center;
-    font-size: 1.3rem;
-    opacity: .8;
-    text-shadow: 0 0 .6rem #000;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: .05rem;
+    opacity: .55;
 }
 
-/* ---------- Small screens ---------- */
+.hint kbd {
+    font-family: inherit;
+    padding: 0 .5rem;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: .4rem;
+}
+
+/* ======================================================
+   Small screens
+   ====================================================== */
 
 @media (max-width: 750px) {
     h1 {
         font-size: 2.4rem;
+        letter-spacing: .4rem;
+        margin-bottom: .6rem;
     }
 
-    .controls {
+    .controls,
+    .transport {
         display: flex;
-        gap: 1rem 1.4rem;
+        gap: .8rem 1.2rem;
+        padding: .8rem;
+    }
+
+    .transport-main,
+    .transport-opts {
+        gap: .6rem 1rem;
     }
 
     input[type="range"] {
-        width: 10rem;
+        width: 9rem;
     }
 
-    .keys {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        width: 100%;
-        max-width: 42rem;
-        margin: 0 auto;
+    .dock {
+        padding: 0 .8rem .6rem;
     }
 
-    .key {
-        width: auto;
-        margin: 0;
-        aspect-ratio: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .track {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "info actions" "time time";
+        gap: .5rem .8rem;
     }
 
-    kbd {
-        font-size: 2.6rem;
+    .track-info {
+        grid-area: info;
+        flex-direction: row;
+        align-items: center;
+        gap: .8rem;
+    }
+
+    .timeline {
+        grid-area: time;
+        height: 3.6rem;
+    }
+
+    .track-actions {
+        grid-area: actions;
+    }
+
+    .track-vol {
+        width: 5.5rem;
     }
 }
 
-/* ---------- Touch devices: lock the screen like an instrument app ---------- */
+/* ======================================================
+   Touch devices: lock the screen like an instrument app
+   ====================================================== */
 
 @media (pointer: coarse) {
     html,
@@ -257,10 +847,6 @@ kbd {
         height: 100%;
         overflow: hidden;
         overscroll-behavior: none;    /* no pull-to-refresh / rubber-band bounce */
-    }
-
-    html {
-        background-attachment: scroll; /* "fixed" backgrounds jitter on iOS */
     }
 
     body {
@@ -274,84 +860,8 @@ kbd {
         -webkit-touch-callout: none;  /* no long-press menu */
     }
 
-    .keys {
+    .stage {
         min-height: 0;
-        touch-action: none;           /* taps on pads never scroll or zoom */
-    }
-}
-
-@media (pointer: coarse) and (max-width: 750px) {
-    .top {
-        padding: 1rem 1rem .6rem;
-    }
-
-    h1 {
-        margin-bottom: .8rem;
-    }
-
-    .status {
-        min-height: 0;
-        margin-top: .4rem;
-    }
-
-    .status:empty {
-        display: none;
-    }
-
-    /* Pads fill whatever height is left, so everything fits on one screen */
-    .keys {
-        grid-template-rows: repeat(3, minmax(0, 1fr));
-        padding: 1rem 1rem 1.6rem;
-    }
-
-    .key {
-        aspect-ratio: auto;
-    }
-}
-
-/* Phone turned sideways: keep everything on one screen */
-@media (pointer: coarse) and (max-height: 500px) {
-    h1 {
-        display: none;
-    }
-
-    .top {
-        padding: .6rem;
-    }
-
-    .controls {
-        padding: .6rem 1rem;
-        gap: .6rem 1.2rem;
-    }
-
-    /* Big pads in a 5 × 2 grid that fills the rest of the screen */
-    .keys {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        gap: .8rem;
-        width: 100%;
-        max-width: none;
-        padding: .6rem 1rem 1rem;
-    }
-
-    .key {
-        width: auto;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-}
-
-@media (hover: none) {
-    /* Touch devices: keyboard letters aren't useful */
-    kbd {
-        display: none;
-    }
-
-    .sound {
-        font-size: 1.4rem;
     }
 
     .hint {
@@ -359,8 +869,137 @@ kbd {
     }
 }
 
+@media (pointer: coarse) and (max-width: 750px) {
+    h1 {
+        display: none;
+    }
+
+    .top {
+        padding: .8rem .8rem 0;
+    }
+
+    .status:empty {
+        display: none;
+    }
+
+    .track-list {
+        max-height: 22vh;
+    }
+}
+
+/* Small phones (iPhone SE and similar): tighter controls so the kit stays big */
+@media (pointer: coarse) and (max-width: 750px) and (max-height: 740px) {
+    .controls,
+    .transport {
+        padding: .5rem .8rem;
+        gap: .5rem 1rem;
+        font-size: 1.4rem;
+    }
+
+    .transport-main,
+    .transport-opts {
+        gap: .5rem .8rem;
+    }
+
+    .btn {
+        padding: .35rem .9rem;
+    }
+
+    select,
+    input[type="number"] {
+        padding: .2rem .5rem;
+    }
+
+    .beats {
+        gap: .35rem;
+        padding: 0;
+    }
+
+    .beats i {
+        width: .8rem;
+        height: .8rem;
+    }
+
+    .dock {
+        gap: .4rem;
+        padding-bottom: .4rem;
+    }
+}
+
+/* Phone turned sideways: controls in a side column, the kit gets the height */
+@media (pointer: coarse) and (max-height: 500px) {
+    body {
+        display: grid;
+        grid-template-columns: 24rem 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "top stage" "dock stage";
+    }
+
+    .top {
+        grid-area: top;
+        padding: .6rem 0 0 .6rem;
+    }
+
+    .stage {
+        grid-area: stage;
+    }
+
+    .dock {
+        grid-area: dock;
+        padding: .6rem 0 .6rem .6rem;
+        align-items: stretch;
+        overflow-y: auto;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .controls,
+    .transport {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .6rem;
+        padding: .8rem;
+        font-size: 1.4rem;
+    }
+
+    .transport-main,
+    .transport-opts {
+        justify-content: space-between;
+    }
+
+    .control {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: .6rem;
+    }
+
+    input[type="range"] {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+
+    /* tracks panel floats over the kit so the side column stays usable */
+    .tracks {
+        position: fixed;
+        left: 25rem;
+        right: 1rem;
+        bottom: 1rem;
+        width: auto;
+        z-index: 5;
+        background: rgba(15, 10, 12, .92);
+    }
+
+    .track-list {
+        max-height: 50vh;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .key {
-        transition: none;
+    .btn.rec[aria-pressed="true"] {
+        animation: none;
     }
 }
