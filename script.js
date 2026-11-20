@@ -121,6 +121,73 @@ function getCtx() {
     return ctx;
 }
 
+/* ---------- Unlocking audio on phones ----------
+   - Browsers only allow audio after a real user gesture. On touch screens
+     `pointerdown` doesn't count, but `touchend` / `pointerup` / `click` do,
+     so we resume the AudioContext from those.
+   - On iPhone, the silent switch mutes Web Audio. Telling Safari this is a
+     "playback" app (or playing a silent <audio> once) makes sound play anyway. */
+
+let unlocked = false;
+
+function silentWavUrl() {
+    // 0.1 s of silence as a tiny WAV file
+    const rate = 8000, len = 800;
+    const buf = new ArrayBuffer(44 + len);
+    const v = new DataView(buf);
+    const str = (o, s) => [...s].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+    str(0, 'RIFF'); v.setUint32(4, 36 + len, true); str(8, 'WAVE');
+    str(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, rate, true); v.setUint32(28, rate, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+    str(36, 'data'); v.setUint32(40, len, true);
+    for (let i = 0; i < len; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([buf], { type: 'audio/wav' }));
+}
+
+function unlockAudio() {
+    getCtx();
+    if (ctx.state === 'running' && unlocked) return;
+
+    try {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    } catch { /* not supported */ }
+
+    if (!unlocked) {
+        const a = new Audio(silentWavUrl());
+        a.setAttribute('playsinline', '');
+        a.play().catch(() => {});
+        // A silent buffer through Web Audio finishes the unlock on older iOS
+        const src = ctx.createBufferSource();
+        src.buffer = ctx.createBuffer(1, 1, 22050);
+        src.connect(ctx.destination);
+        src.start(0);
+    }
+
+    ctx.resume().then(() => {
+        if (ctx.state === 'running') unlocked = true;
+    });
+}
+
+/* ---------- Keep the screen still on phones ----------
+   iOS ignores user-scalable=no, so block pinch-zoom and page dragging here.
+   Form controls (slider, BPM box, kit menu) still work normally. */
+
+const isControl = (el) => el instanceof Element && el.closest('input, select, label, .controls');
+
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 1 || !isControl(e.target)) e.preventDefault();
+}, { passive: false });
+
+['gesturestart', 'gesturechange', 'dblclick'].forEach((type) =>
+    document.addEventListener(type, (e) => e.preventDefault(), { passive: false }));
+
+window.addEventListener('contextmenu', (e) => {
+    if (!isControl(e.target)) e.preventDefault();
+});
+
+['touchend', 'pointerup', 'click', 'keydown'].forEach((type) =>
+    window.addEventListener(type, unlockAudio, { capture: true, passive: true }));
+
 function loadSamples() {
     if (samplesLoading) return samplesLoading;
     samplesLoading = Promise.all(PADS.map(async ({ name }) => {

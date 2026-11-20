@@ -249,6 +249,101 @@ kbd {
     }
 }
 
+/* ---------- Touch devices: lock the screen like an instrument app ---------- */
+
+@media (pointer: coarse) {
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;    /* no pull-to-refresh / rubber-band bounce */
+    }
+
+    html {
+        background-attachment: scroll; /* "fixed" backgrounds jitter on iOS */
+    }
+
+    body {
+        position: fixed;
+        inset: 0;
+        height: 100dvh;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                 env(safe-area-inset-bottom) env(safe-area-inset-left);
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;  /* no long-press menu */
+    }
+
+    .keys {
+        min-height: 0;
+        touch-action: none;           /* taps on pads never scroll or zoom */
+    }
+}
+
+@media (pointer: coarse) and (max-width: 750px) {
+    .top {
+        padding: 1rem 1rem .6rem;
+    }
+
+    h1 {
+        margin-bottom: .8rem;
+    }
+
+    .status {
+        min-height: 0;
+        margin-top: .4rem;
+    }
+
+    .status:empty {
+        display: none;
+    }
+
+    /* Pads fill whatever height is left, so everything fits on one screen */
+    .keys {
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        padding: 1rem 1rem 1.6rem;
+    }
+
+    .key {
+        aspect-ratio: auto;
+    }
+}
+
+/* Phone turned sideways: keep everything on one screen */
+@media (pointer: coarse) and (max-height: 500px) {
+    h1 {
+        display: none;
+    }
+
+    .top {
+        padding: .6rem;
+    }
+
+    .controls {
+        padding: .6rem 1rem;
+        gap: .6rem 1.2rem;
+    }
+
+    /* Big pads in a 5 × 2 grid that fills the rest of the screen */
+    .keys {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: .8rem;
+        width: 100%;
+        max-width: none;
+        padding: .6rem 1rem 1rem;
+    }
+
+    .key {
+        width: auto;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 @media (hover: none) {
     /* Touch devices: keyboard letters aren't useful */
     kbd {
